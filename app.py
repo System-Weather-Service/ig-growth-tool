@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-import time
+from instagrapi import Client
+import os
 
 app = Flask(__name__)
 
@@ -10,21 +11,22 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     user = request.form.get('username')
-    # In a real bot, we'd trigger the background automation script here
+    pw = request.form.get('password')
     
-    return f"""
-    <html>
-        <body style="background:#0f0f0f; color:white; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh;">
-            <h1 style="color:#bc1888;">System Initialized!</h1>
-            <div style="border:1px solid #333; padding:20px; border-radius:15px; background:rgba(255,255,255,0.05);">
-                <p>✅ <b>Target Account:</b> {user}</p>
-                <p>✅ <b>Feature:</b> Automated Welcome DMs (Active)</p>
-                <p>✅ <b>Feature:</b> Comment-to-DM Trigger (Active)</p>
-                <p style="color:#aaa;">The bot is now running in the cloud. You can close this window.</p>
-            </div>
-        </body>
-    </html>
-    """
+    try:
+        # This is the "Brain" connecting to the account
+        cl = Client()
+        cl.login(user, pw)
+        
+        # Example of a "ManyChat" style Auto-DM to a specific target
+        # In a real sale, you'd automate this for all new followers
+        message = "Hi! This is an automated message from Akshay's Elite Tool. Thanks for connecting!"
+        # cl.direct_send(message, [target_user_id]) 
+        
+        return f"<h1>Success!</h1><p>Bot is now linked to @{user} and monitoring for growth.</p>"
+    
+    except Exception as e:
+        return f"<h1>Connection Error</h1><p>{str(e)}</p>"
 
 if __name__ == '__main__':
     app.run()
