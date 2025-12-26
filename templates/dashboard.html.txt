@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bot Dashboard</title>
+    <style>
+        body { background: #0f0f0f; color: white; font-family: sans-serif; text-align: center; padding: 50px; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; display: inline-block; margin: 10px; width: 200px; border: 1px solid #333; }
+        .active { color: #00ff00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    <p class="active">● Bot Status: Running in Cloud</p>
+    
+    <div class="stat-card">
+        <h3>DMs Sent</h3>
+        <h2 style="color: #bc1888;">142</h2>
+    </div>
+    <div class="stat-card">
+        <h3>New Leads</h3>
+        <h2 style="color: #bc1888;">28</h2>
+    </div>
+    
+    <p style="margin-top: 30px;">Setting up your "Auto-Welcome" script... 85% complete</p>
+</body>
+</html>
